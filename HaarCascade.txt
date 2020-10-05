@@ -1,0 +1,35 @@
+Haar cascade algorithm:
+-> We will feed data about 1000's of faces to the algorithm, so whenever a frame comes, if there is a frame present it can detect it.
+Parameters that are looked into while detecting a face in 1000's of images in Haars cascade algorithm:
+take a look in pictures of edge features in:
+https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html
+(1st one is with top-white and bottom-black
+ 2nd one is with left-white and right-black)
+ We can consider all the features mentioned in link while distinguishing the image
+1. In harr cascade algorithm frame/image is initially converted to greyscale image then as per the features mentioned in above link, and data obtained 
+from 1000's of faces we see in greyscale and as per features how a face would look like using detectmultiscale()
+-> here if we see some combination of all features(edge,line,four rectangle) we see how a face in greyscale looks like, every pixel is compared with it, 
+for instance only as an example
+: face contains eyes,nose,mouth,etc SO AMONG 1000'S OF IMAGES WE SEE IN GREYSCALE HOW PIXELS ARE ARRANGED(WITH EDGE FEATURES, ALSO WITH OTHER FEATURES
+MENTIONED IN ABOVE LINK)AND THEN AS PER THAT DATA, IN OUR FRAME WE DO PATTERN MATCHING USING FEATURES(EDGE ,LINE AND FOUR RECTANGLE)
+ AND ROUND AROUND HOW FACE WOULD LOOK LIKE USING THIS FEATURES AND WITH HELP OF DETECTMULTISCALE() WE CAN RETURN COORDINATES OF TOP LEFT(X,Y) 
+ AND WIDTH,HEIGHT TO ADD TO X,Y TO GET OUR FACE IN CASE OF RECTANGLE
+
+How Hars cacade xml is built:
+1. start with training data:
+-> Positive Images - In this case we feed bunch of images that are frontal faces to algorithm
+-> Negative Images - In this case we feed bunch of images that are not faces to algorithm
+This type of training data to algorithm is called as SUPERVISED LEARNNG
+IT IS CALLED SUPERVISED SINCE WE KNOW THE IMAGES WE ARE GIVING TO ALGORITHM ARE FACES OR NOT
+Unsupervised learnin(here we don't know if given image is a face or not)
+2. Now we pass features row by row i.e iterating through each pixel and then find black:white ratio of pixels that form a image.
+we can then see difference between black and white pixels in the image and understand what is the threshold that is needed for bunch of pixels to be called as image
+3. we do this iteration for all 5 features for thousands of images, and basically CASSCADE THEM TO A ALGORITHM TO DETECT FACES. THE CACADING OF RESULTS
+ARE DONE USING A CASCADE CLASSIFIER
+
+Note: OpenCV provides us with a pretrained classifier that has the chain of haar features that best matches a frontal face
+After it's classified we just pass sliding window of the image into the classifier and it runs through all of the haar cascades to see if it's a face
+(IMP***) While feature is iterating through image it may start as small as 2px, gradually increasing it's length and height until we find perfect match
+for a combination of pixels with color which is correct according to 1000's of traineddata
+
+ 
